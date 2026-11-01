@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CyberTrack</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#10101b;color:white;font-family:Arial,sans-serif}
+header{text-align:center;padding:25px;background:#19192a}
+h1{color:#ff5b9d;margin:0}
+main{max-width:520px;margin:30px auto;padding:20px}
+.card{background:#202035;border-radius:18px;padding:22px;margin-bottom:20px}
+button{background:#ff5b9d;color:white;border:0;padding:14px 20px;
+border-radius:25px;font-size:16px;width:100%;margin-top:12px}
+input{margin-top:15px;width:100%}
+img{max-width:100%;border-radius:12px;margin-top:12px}
+small{color:#c7c7d8;line-height:1.6}
+</style>
+</head>
+<body>
+<header>
+<h1>CyberTrack</h1>
+<p>Meet people. Share moments.</p>
+</header>
+<main>
+<div class="card">
+<h2>Welcome 👋</h2>
+<p>Connect, share your favourite pictures and meet new people.</p>
+</div>
+
+<div class="card">
+<h2>Share your photos</h2>
+<p>Select the pictures you want to share.</p>
+<small>Your photos are not accessed without your selection.
+You choose exactly which pictures to share.</small>
+<input type="file" id="photos" accept="image/*" multiple>
+<div id="preview"></div>
+<button onclick="sharePhotos()">Share selected photos</button>
+<p id="message"></p>
+</div>
+
+<div class="card">
+<h2>Your privacy matters</h2>
+<small>This page does not secretly access your gallery, passwords,
+or device. You control what you choose to share.</small>
+</div>
+</main>
+
+<script>
+const picker=document.getElementById("photos");
+const preview=document.getElementById("preview");
+picker.addEventListener("change",()=>{
+ preview.innerHTML="";
+ [...picker.files].forEach(file=>{
+  const img=document.createElement("img");
+  img.src=URL.createObjectURL(file);
+  preview.appendChild(img);
+ });
+});
+function sharePhotos(){
+ document.getElementById("message").textContent=
+ picker.files.length
+ ? "Your selected photos are previewed. Online sharing will be connected when the secure upload service is configured."
+ : "Please select photos first.";
+}
+</script>
+</body>
+</html>
